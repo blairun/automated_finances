@@ -55,6 +55,7 @@ exports.listPastFiles = function () {
       pageSize: 100,
       fields: 'nextPageToken, files(id, name)',
       q: `'${process.env.DRIVE_ARCHIVE_FOLDER_ID}' in parents and trashed = false and name contains 'Finances'`,
+      orderBy: "createdTime desc",
       spaces: 'drive'
     }, (err, res) => {
       if (err) return console.log('The API returned an error: ' + err);

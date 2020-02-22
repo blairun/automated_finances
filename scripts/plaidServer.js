@@ -28,7 +28,8 @@ app.use(bodyParser.json())
 app.get('/', (req, res, next) => {
   res.render(path.resolve(__dirname, 'plaid.ejs'), {
     PLAID_ACCOUNT: account,
-    PLAID_PUBLIC_KEY: process.env.PLAID_PUBLIC_KEY
+    PLAID_PUBLIC_KEY: process.env.PLAID_PUBLIC_KEY,
+    PLAID_public_token: process.env.PLAID_public_token
   })
 })
 
@@ -45,6 +46,18 @@ function saveAccessToken(token) {
   console.log('Saved.')
   console.log()
 }
+
+
+function savePublicToken(token) {
+  console.log()
+  console.log(`Saving public token: ${token}`)
+  saveEnv({
+    [`PLAID_public_token`]: token
+  })
+  console.log('Saved.')
+  console.log()
+}
+
 
 // Exchange token flow - exchange a Link public_token for
 // an API access_token
@@ -156,7 +169,7 @@ app.get('/auth', function(request, response, next) {
 // reset login to test Update Mode in sandbox environment  
 app.get('/reset_login', function (request, response, next) {
   console.log("reset_login");
-  client.resetLogin(process.env.PLAID_TOKEN_sandbox,
+  client.resetLogin(process.env.PLAID_TOKEN_sandbox_citi,
     function (err, reset_login_response) {
       // Handle err
       if (err != null) {
@@ -175,9 +188,9 @@ app.get('/reset_login', function (request, response, next) {
 // This public_token can be used to initialize Link
 // in update mode for the user
 app.get('/create_public_token', function(request, response, next) {
-  console.log("create_public_token");
+  // console.log("create_public_token");
   // replace the with the access token of the item you want to renew
-  client.createPublicToken(process.env.PLAID_TOKEN_citibank, function(err, res) {
+  client.createPublicToken(process.env.PLAID_broken_token, function(err, res) {
     if(err != null) {
       console.log(JSON.stringify(err));
       response.json({error: JSON.stringify(err)});
@@ -185,7 +198,8 @@ app.get('/create_public_token', function(request, response, next) {
       // Use the public_token to initialize Link
       var PUBLIC_TOKEN = res.public_token;
       response.json({public_token: PUBLIC_TOKEN});
-      console.log(PUBLIC_TOKEN)
+      // console.log(PUBLIC_TOKEN)
+      savePublicToken(PUBLIC_TOKEN)
     }
   });
 });
@@ -195,7 +209,7 @@ app.get('/create_public_token', function(request, response, next) {
 app.get('/remove_item', function (request, response, next) {
   console.log("remove_item");
   // replace the with the access token of the item you want to remove
-  client.removeItem(process.env.PLAID_TOKEN_sandbox, (err, result) => {
+  client.removeItem(process.env.PLAID_TOKEN_, (err, result) => {
     if (err != null) {
       // Handle err
       console.log(JSON.stringify(err));
@@ -289,6 +303,7 @@ app.get('/item', function(request, response, next) {
 
 var server = app.listen(APP_PORT, function() {
   console.log(`Server started at http://localhost:${APP_PORT}`);
+  console.log(`Server started at http://192.168.1.150:${APP_PORT}`);
 });
 
 var prettyPrintResponse = response => {

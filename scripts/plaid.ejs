@@ -42,7 +42,8 @@
             <div class="item-data-row__center">
               <div class="item-data-row__nicename">Reset login (sandbox only)</div>
               <div class="item-data-row__endpoint">/sandbox/item/reset_login</div>
-              <div class="item-data-row__description">Reset login to test Update Mode in sandbox environment. 
+              <div class="item-data-row__description">Reset login to test Update Mode and 
+                Login Credentials error in sandbox environment. 
                 See reset_login function in plaidServer.js </div>
             </div>
             <div class="item-data-row__right">
@@ -65,9 +66,8 @@
               <div class="item-data-row__nicename">Update public token</div>
               <div class="item-data-row__endpoint">/item/public_token/create</div>
               <div class="item-data-row__description">Create a public token to refresh account after credential change.
-                First, update the process.env.xxxx variable in the create_public_token function in plaidServer.js. 
-                Press this button and then copy the public token from the terminal and paste it in the 
-                link update function in plaid.ejs. Then save the file, restart the server, and click the Update button below.</div>
+                Paste the broken token into it's namesake key in ".env". 
+                Press this button to create a public token, then restart the server, and click the Update button below.</div>
             </div>
             <div class="item-data-row__right">
               <button id="update-item-btn"
@@ -81,8 +81,8 @@
           </div>
 
           <p></p>
-          <div class="item-data-row__description">Update item connection after login changes. Make sure you have created
-            a public token for the item and pasted it in the link update funtion (plaid.ejs).</div>
+          <div class="item-data-row__description">Update item connection after login changes. 
+            Make sure you have already created a public token (above) and restarted the server.</div>
           <button id="link-update-btn" class="button button--is-primary">Update Item</button>
 
           <!-- remove item -->
@@ -384,9 +384,7 @@
       // handler.open();
       var updateHandler = Plaid.create({
         ...linkHandlerCommonOptions,
-        // token: 'CREATED_PUBLIC_TOKEN',
-        // paste in the public token for the item are updating
-        token: 'public-development-867d865b-072e-4f3a-af29-7bcc8f9ad96f',
+        token: '<%= PLAID_public_token %>',
         onSuccess: function(public_token, metadata) {
           console.log(public_token, metadata)
         },
