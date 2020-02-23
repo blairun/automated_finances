@@ -1,5 +1,6 @@
 const { google } = require('googleapis')
 const oAuth2Client = require('./googleClient')
+const moment = require('moment')
 
 oAuth2Client.setCredentials({
   access_token: process.env.DRIVE_ACCESS_TOKEN,
@@ -69,8 +70,34 @@ exports.listPastFiles = function () {
         // this is where you save the array that you'll print to spreadsheet
         // console.log(files)
         const files_list = files.map(function (file) {
+          
+          var a = moment().add(1, 'd');
+          var b = moment(file.name.replace("Finances_", ""))
+          var c = moment(file.name.replace("Finances_", ""))
+
+          var years = a.diff(b, 'year');
+          b.add(years, 'years');
+
+          var months = a.diff(b, 'months');
+          b.add(months, 'months');
+
+          var days = a.diff(b, 'days');
+
+          // console.log(years + ' years ' + months + ' months ' + days + ' days');
+
+          var dateDiff = ""
+          if (years != 0) {
+            dateDiff = dateDiff + years + " yr "
+          }
+          if (months != 0) {
+            dateDiff = dateDiff + months + " mo "
+          }
+          if (days != 0) {
+            dateDiff = dateDiff + days + " d"
+          }
+          
           return {
-            name: file.name.replace("Finances_", ""),
+            name: moment(c).format("M/D/YY - ") + dateDiff,
             id: file.id
           }
         });
