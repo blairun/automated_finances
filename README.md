@@ -71,3 +71,8 @@ See here for refresher on updating cron jobs:
 https://www.ostechnix.com/a-beginners-guide-to-cron-jobs/
 
 
+## Sample Spreadsheet
+
+Example of spreadsheet layout with some pretend data.
+
+![Screenshot of sample spreadsheet](\show_and_tell.png)
