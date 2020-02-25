@@ -75,4 +75,4 @@ https://www.ostechnix.com/a-beginners-guide-to-cron-jobs/
 
 Example of spreadsheet layout with some pretend data.
 
-![Screenshot of sample spreadsheet](\show_and_tell.png)
+![Screenshot of sample spreadsheet](https://github.com/blairun/automated_finances/blob/master/show_and_tell.png)
