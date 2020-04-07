@@ -2,15 +2,18 @@
 # Test by running this command:
 # bash /home/pi/Documents/automated_finances/crontab_copy.sh
 
-
+# To edit with default editor (nano):
+# crontab - e
 # 30 11,23 * * * cd /home/pi/Documents/automated_finances && /usr/bin/node update_transactions.js
 
-# 35 11,23 * * * cd /home/pi/Documents/automated_finances && /usr/bin/node update_balances.js
+# 35 11,23 * * * cd /home/pi/Documents/automated_finances && /usr/bin/node update_balances.js    
 
-# 40 23 * * * cd /home/pi/Documents/automated_finances/drive && /usr/bin/node copy_file.js
+# 40 23 * * * cd /home/pi/Documents/automated_finances/drive && /usr/bin/node copy_file.js       
 # #5 0 * * * bash /home/pi/Documents/automated_finances/curl_copy.sh
 
-# 45 23 * * * cd /home/pi/Documents/automated_finances && /usr/bin/node update_past_files.js
+# 45 23 * * * cd /home/pi/Documents/automated_finances && /usr/bin/node update_past_files.js     
+
+# 1 0 * * * cd /home/pi/Documents/automated_finances && /usr/bin/node update_bills_date.js
 
 
 echo "Updating transactions..."
@@ -27,3 +30,6 @@ cd /home/pi/Documents/automated_finances/drive && /usr/bin/node copy_file.js
 echo "-------"
 echo "Updating past file list..."
 cd /home/pi/Documents/automated_finances && /usr/bin/node update_past_files.js
+echo "-------"
+echo "Updating bills date..."
+cd /home/pi/Documents/automated_finances && /usr/bin/node update_bills_date.js

@@ -3,7 +3,8 @@
 const dotenv = require('dotenv')
 dotenv.config()
 
-const account = process.argv[2]
+// const account = process.argv[2]
+const account = "account_name"
 if (!account) {
   throw new Error('An account name must be provided.')
 }

@@ -5,14 +5,14 @@
   "author": "Evan You",
   "license": "MIT",
   "scripts": {
-    "test": "node index.js",
+    "update-balances": "node update_balances.js",
+    "update-transactions": "node update_transactions.js",
     "test-plaid": "node scripts/testPlaid.js",
     "test-sheets": "node scripts/testSheets.js",
+    "test-drive": "node drive/scripts/testDrive.js",
     "token-plaid": "node scripts/plaidServer.js",
     "token-sheets": "node scripts/getSheetsToken.js",
-    "test-drive": "node drive/scripts/testDrive.js",
-    "token-drive": "node drive/scripts/getDriveToken.js",
-    "test-env": "node test_env.js"
+    "token-drive": "node drive/scripts/getDriveToken.js"
   },
   "dependencies": {
     "body-parser": "^1.18.3",

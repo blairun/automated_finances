@@ -17,7 +17,7 @@ Create an `.env` file in the root directory. Variables in this file will be load
 - Once approved, fill out the following in `.env`:
 
   - `PLAID_CLIENT_ID=`
-  - `PLAID_SECRET=`
+  - `PLAID_SECRET_development=`
   - `PLAID_PUBLIC_KEY=`
 
 - Now you need to connect to your financial institutions to generate access tokens.
@@ -64,11 +64,14 @@ Code in the '/drive' folder archives a copy of the Finances spreadsheet each day
 
 Adjust the cron config to tweak the time/frequency of the updates. For example, update transactions daily at midnight and noon.
 
+To edit with default editor (nano):
+crontab - e
+
 See this link for help running Node.js applications as cron job:
 https://stackoverflow.com/questions/5849402/how-can-you-execute-a-node-js-script-via-a-cron-job
 
 See here for refresher on updating cron jobs:
-https://www.ostechnix.com/a-beginners-guide-to-cron-jobs/
+https://www.ostechni1x.com/a-beginners-guide-to-cron-jobs/
 
 
 ## Sample Spreadsheet
