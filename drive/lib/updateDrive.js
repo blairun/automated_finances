@@ -30,6 +30,11 @@ exports.listFiles = function () {
     } else {
       console.log('No files found.');
     }
+
+    // var cont = res.data.nextPageToken
+    // console.log(cont)
+    // if (cont.length > 0) {listFiles()}
+
   });
 }
 
@@ -53,7 +58,7 @@ exports.copyFile = function (fileid, parents, name) {
 exports.listPastFiles = function () {
   return new Promise((resolve, reject) => {
     drive.files.list({
-      pageSize: 100,
+      pageSize: 365, // poor mans paging, pull in last year of data
       fields: 'nextPageToken, files(id, name)',
       q: `'${process.env.DRIVE_ARCHIVE_FOLDER_ID}' in parents and trashed = false and name contains 'Finances'`,
       orderBy: "createdTime desc",
