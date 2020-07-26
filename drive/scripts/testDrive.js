@@ -1,6 +1,8 @@
 require('dotenv').config({ path: '../../.env' })
 
-const { listFiles } = require('../lib/updateDrive')
+const { listFiles, retrieveAllFiles } = require('../lib/updateDrive')
 
 // lists files in drive
 listFiles()
+
+// retrieveAllFiles()
